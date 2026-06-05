@@ -101,7 +101,7 @@ export const Footer = () => {
 
         <div className="mt-8 pt-6 border-t border-slate-800/50 w-screen relative left-1/2 -translate-x-1/2 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
-            <p className="text-[14px] sm:text-xs text-slate-400 font-semibold flex items-center justify-center gap-2">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-300 font-bold leading-relaxed">
               
               All images are for display purposes. Contact us for actual photos and details.
             </p>

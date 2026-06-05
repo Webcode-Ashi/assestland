@@ -84,10 +84,12 @@ export const Hero = () => {
             
 
             {/* Heading */}
-            <h1 className="animate-hero-item font-heading text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.1]">
+            <h1 className="animate-hero-item font-heading text-6xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-7xl font-extrabold tracking-tight leading-[1.1]">
               Assetland
               <br />
-              <span className="text-gradient-cyan-blue">- Creating Real Wealth with AI</span>
+            <span className="block -mt-2 sm:mt-0 text-gradient-cyan-blue text-4xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
+  Creating Real Wealth with AI
+</span>
             </h1>
 
             {/* Description */}
