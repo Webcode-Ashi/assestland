@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { propertiesData } from '../../data/properties';
-import { MapPin, BedDouble, Bath, Square, TrendingUp, ArrowRight, Filter } from 'lucide-react';
+import { MapPin, BedDouble, Bath, Square, TrendingUp, ArrowRight, Filter, Flame } from 'lucide-react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -117,6 +117,7 @@ function PropCard({ p, index }) {
 /* ── FeaturedProperties ── */
 export const FeaturedProperties = () => {
   const [filter, setFilter] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(6); // 2 rows (3 columns = 6 cards per 2 rows)
   const sectionRef = useRef(null);
 
   const filters = [
@@ -129,6 +130,18 @@ export const FeaturedProperties = () => {
   const filtered = filter === 'all'
     ? propertiesData
     : propertiesData.filter(p => p.category === filter);
+
+  // Reset visible count when filter changes
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [filter]);
+
+  const displayedProperties = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  const handleViewMore = () => {
+    setVisibleCount(prev => prev + 3); // Add 1 row (3 cards)
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -163,7 +176,8 @@ export const FeaturedProperties = () => {
 
         <div className="fp-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <SectionHeading
-            badge="🔥 Premium Selections"
+            badge="Premium Selections"
+            icon={Flame}
             title="Featured Properties"
             description="Compare hand-picked assets currently trading below average market valuation benchmarks."
             align="left"
@@ -186,18 +200,27 @@ export const FeaturedProperties = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((prop, i) => (
+          {displayedProperties.map((prop, i) => (
             <PropCard key={prop.id} p={prop} index={i} />
           ))}
         </div>
 
         <div className="fp-cta text-center mt-12">
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="glow-btn inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold px-8 py-3.5 rounded-xl text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition-colors cursor-pointer"
-          >
-            View All Properties <ArrowRight size={16} />
-          </button>
+          {hasMore ? (
+            <button
+              onClick={handleViewMore}
+              className="glow-btn inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold px-8 py-3.5 rounded-xl text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition-colors cursor-pointer"
+            >
+             View All Properties <ArrowRight size={16} />
+            </button>
+          ) : (
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="glow-btn inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold px-8 py-3.5 rounded-xl text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition-colors cursor-pointer"
+            >
+               View More <ArrowRight size={16} />
+            </button>
+          )}
         </div>
       </div>
     </section>

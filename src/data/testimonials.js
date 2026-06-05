@@ -17,7 +17,7 @@ export const testimonialsData = [
   },
   {
     id: 3,
-    quote: "The market alerts allowed us to lock down properties in zoning corridors right before municipal approval. Extremely valuable platform.",
+    quote: "The market alerts allowed us to lock down properties in zoning corridors right before municipal approval.Properties in zoning corridors Extremely valuable platform.",
     author: "Marcus Vance",
     title: "Vance Holdings LLC",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",

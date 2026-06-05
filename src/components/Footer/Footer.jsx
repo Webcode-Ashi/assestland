@@ -76,15 +76,15 @@ export const Footer = () => {
             <ul className="space-y-3 text-xs sm:text-sm text-slate-400">
               <li className="flex items-center gap-2">
                 <FiMail size={14} className="text-cyan-400" />
-                <a href="mailto:invest@assetland.com" className="hover:text-cyan-450">invest@assetland.com</a>
+                <a href="mailto:contact@diintech.com" className="hover:text-cyan-450">contact@diintech.com</a>
               </li>
               <li className="flex items-center gap-2">
                 <FiPhone size={14} className="text-cyan-400" />
-                <a href="tel:+916386299554" className="hover:text-cyan-450">+91 6386299554</a>
+                <a href="tel:+918147540362" className="hover:text-cyan-450">+91 8147540362</a>
               </li>
               <li className="flex items-start gap-2">
                 <FiMapPin size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                <span>Cyber Heights, Suite 900, Financial District</span>
+                <span>C-116, Sector-2, Noida, Uttar Pradesh – 201301, India </span>
               </li>
             </ul>
           </div>
@@ -96,6 +96,15 @@ export const Footer = () => {
           <div className="flex space-x-4">
             <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-400 transition-colors">Terms of Service</a>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-slate-800/50 w-screen relative left-1/2 -translate-x-1/2 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto text-center">
+            <p className="text-[14px] sm:text-xs text-slate-400 font-semibold flex items-center justify-center gap-2">
+              
+              All images are for display purposes. Contact us for actual photos and details.
+            </p>
           </div>
         </div>
       </div>

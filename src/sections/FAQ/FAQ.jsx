@@ -4,6 +4,7 @@ import FAQAccordion from '../../components/FAQAccordion/FAQAccordion';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
+import { HelpCircle } from 'lucide-react';
 
 export const FAQ = () => {
   const [openIdx, setOpenIdx] = useState(0);
@@ -31,7 +32,8 @@ export const FAQ = () => {
         
         {/* Header */}
         <SectionHeading
-          badge="❓ FAQ Support Center"
+          badge="FAQ Support Center"
+          icon={HelpCircle}
           title="Frequently Asked Questions"
           description="Everything you need to know about the AssetLand platform and investment methodology."
           align="center"

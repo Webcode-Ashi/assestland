@@ -4,6 +4,7 @@ import TestimonialCard from '../../components/TestimonialCard/TestimonialCard';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
+import { Users } from 'lucide-react';
 
 export const Testimonials = () => {
   const scopeRef = useGSAP(() => {
@@ -27,7 +28,8 @@ export const Testimonials = () => {
     <section id="testimonials" ref={scopeRef} className="py-16 sm:py-20 relative bg-slate-950/20 border-y border-slate-800/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="🤝 Success Stories"
+          badge="Success Stories"
+          icon={Users}
           title="Trusted by Modern Investors"
           description="Read how funds and individual investors are shifting their real estate pipelines onto AssetLand."
           align="center"

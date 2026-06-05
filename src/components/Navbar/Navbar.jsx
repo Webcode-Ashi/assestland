@@ -63,7 +63,7 @@ export const Navbar = ({ activeSection }) => {
             onClick={() => scrollTo('hero')}
           >
             <img src={logoSymbol} alt="AL" className="w-10 h-10 object-contain animate-glow-glow" />
-            <img src={logoText} alt="ASSETLAND" className="h-5 sm:h-6 object-contain brightness-110" />
+            <img src={logoText} alt="ASSETLAND" className="hidden sm:block h-5 sm:h-6 object-contain brightness-110" />
           </div>
 
           {/* Desktop links */}

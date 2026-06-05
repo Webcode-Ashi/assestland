@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Play } from 'lucide-react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
@@ -20,9 +20,9 @@ export const PropertyShowcase = () => {
     );
 
     gsap.fromTo('.showcase-fade-right',
-      { x: 50, opacity: 0 },
+      { y: 60, opacity: 0 },
       {
-        x: 0,
+        y: 0,
         opacity: 1,
         duration: 0.8,
         ease: 'power3.out',
@@ -39,7 +39,8 @@ export const PropertyShowcase = () => {
           {/* Spatial details column */}
           <div className="lg:col-span-5 space-y-6 showcase-fade-left">
             <SectionHeading
-              badge="🕶️ Interactive Media"
+              badge="Interactive Media"
+              icon={Play}
               title="Virtual Property Showcase & Tours"
               description="Tour premium properties digitally with photorealistic 3D walkthroughs, detailed floor plans, and natural light analysis simulated throughout the day."
               align="left"

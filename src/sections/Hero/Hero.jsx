@@ -1,15 +1,52 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
 import videoBg from '../../assets/videos/video3.mp4';
 import video4 from '../../assets/videos/video4.mp4';
 
 export const Hero = () => {
+  const video4Ref = useRef(null);
+  const bgVideoRef = useRef(null);
+
   const scopeRef = useGSAP(() => {
     gsap.fromTo('.animate-hero-item',
       { y: 40, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, stagger: 0.18, ease: 'power4.out', delay: 0.3 }
     );
+  }, []);
+
+  /* Force background video to always loop and never stop */
+  useEffect(() => {
+    const vid = bgVideoRef.current;
+    if (!vid) return;
+    vid.loop = true;
+    vid.play().catch(() => {});
+
+    const onEnded = () => { vid.currentTime = 0; vid.play().catch(() => {}); };
+    const onPause = () => { vid.play().catch(() => {}); };
+    vid.addEventListener('ended', onEnded);
+    vid.addEventListener('pause', onPause);
+    return () => {
+      vid.removeEventListener('ended', onEnded);
+      vid.removeEventListener('pause', onPause);
+    };
+  }, []);
+
+  /* Force video to always loop and never stop */
+  useEffect(() => {
+    const vid = video4Ref.current;
+    if (!vid) return;
+    vid.loop = true;
+    vid.play().catch(() => {});
+
+    const onEnded = () => { vid.currentTime = 0; vid.play().catch(() => {}); };
+    const onPause = () => { vid.play().catch(() => {}); };
+    vid.addEventListener('ended', onEnded);
+    vid.addEventListener('pause', onPause);
+    return () => {
+      vid.removeEventListener('ended', onEnded);
+      vid.removeEventListener('pause', onPause);
+    };
   }, []);
 
   return (
@@ -20,6 +57,7 @@ export const Hero = () => {
     >
       {/* Video Background */}
       <video
+        ref={bgVideoRef}
         autoPlay
         muted
         loop
@@ -90,15 +128,25 @@ export const Hero = () => {
 
           {/* Video Mockup */}
           <div className="w-full lg:col-span-6 animate-hero-item flex justify-center items-center">
-            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full">
-              {/* Glow ring behind video */}
+            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full overflow-hidden rounded-2xl">
               <div className="absolute inset-0 rounded-2xl bg-cyan-500/10 blur-2xl scale-110" />
               <video
+                ref={video4Ref}
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="relative w-full h-[280px] sm:h-[380px] md:h-[440px] lg:h-[480px] xl:h-[520px] object-contain mix-blend-screen drop-shadow-2xl"
+                className="relative w-full h-[220px] sm:h-[320px] md:h-[400px] lg:h-[480px] xl:h-[520px] object-contain mix-blend-screen drop-shadow-2xl"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const pctX = ((e.clientX - rect.left) / rect.width)  * 100;
+                  const pctY = ((e.clientY - rect.top)  / rect.height) * 100;
+                  e.currentTarget.style.transformOrigin = `${pctX}% ${pctY}%`;
+                  gsap.to(e.currentTarget, { scale: 1.18, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
+                }}
+                onMouseLeave={(e) => {
+                  gsap.to(e.currentTarget, { scale: 1, duration: 0.5, ease: 'power3.out', overwrite: 'auto' });
+                }}
               >
                 <source src={video4} type="video/mp4" />
               </video>

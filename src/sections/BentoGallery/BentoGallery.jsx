@@ -2,7 +2,7 @@ import React from 'react';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, LayoutGrid } from 'lucide-react';
 
 // Import local assets
 import img1 from '../../assets/images/img1.png';
@@ -13,66 +13,12 @@ import img5 from '../../assets/images/img5.png';
 import img6 from '../../assets/images/img6.png';
 
 const galleryData = [
-  {
-    id: 1,
-    image: img1,
-    title: "Summit Plaza Complex",
-    category: "Commercial",
-    price: "$12,450,000",
-    yield: "+14.2% Yield",
-    desc: "A premium Grade-A office complex in the central business district, delivering consistent rental yields.",
-    gridClass: "md:col-span-1 md:row-span-1"
-  },
-  {
-    id: 2,
-    image: img2,
-    title: "Pacific Heights Villa",
-    category: "Residential",
-    price: "$8,900,000",
-    yield: "+9.8% Yield",
-    desc: "An architecturally stunning residential estate featuring floor-to-ceiling glass, infinity pool, and panoramic ocean views.",
-    gridClass: "md:col-span-1 md:row-span-2"
-  },
-  {
-    id: 3,
-    image: img3,
-    title: "Vanguard Logistics Park",
-    category: "Industrial",
-    price: "$18,200,000",
-    yield: "+16.5% Yield",
-    desc: "State-of-the-art distribution center strategically located near major transit corridors with automated logistics integrations.",
-    gridClass: "md:col-span-1 md:row-span-1"
-  },
-  {
-    id: 4,
-    image: img4,
-    title: "Metropolitan Arts Gallery",
-    category: "Commercial",
-    price: "$5,300,000",
-    yield: "+11.4% Yield",
-    desc: "A boutique cultural commercial venue hosting high-value exhibitions and private auctions in the arts district.",
-    gridClass: "md:col-span-1 md:row-span-1"
-  },
-  {
-    id: 5,
-    image: img5,
-    title: "Metro Tech Park",
-    category: "Industrial",
-    price: "$24,500,000",
-    yield: "+15.8% Yield",
-    desc: "A fully leased modern industrial facility optimized for advanced manufacturing and regional distribution.",
-    gridClass: "md:col-span-1 md:row-span-2"
-  },
-  {
-    id: 6,
-    image: img6,
-    title: "Aura Hilltop Retreat",
-    category: "Luxury Estate",
-    price: "$14,800,000",
-    yield: "+10.5% Yield",
-    desc: "A high-end luxury resort property featuring eco-conscious modern architecture, private helipads, and stunning valley views.",
-    gridClass: "md:col-span-2 md:row-span-1"
-  }
+  { id: 1, image: img1, title: "Summit Plaza Complex",       category: "Commercial",    price: "$12,450,000", yield: "+14.2% Yield", desc: "A premium Grade-A office complex in the central business district, delivering consistent rental yields.",                                                                                             gridClass: "md:col-span-1 md:row-span-1" },
+  { id: 2, image: img2, title: "Pacific Heights Villa",       category: "Residential",   price: "$8,900,000",  yield: "+9.8% Yield",  desc: "An architecturally stunning residential estate featuring floor-to-ceiling glass, infinity pool, and panoramic ocean views.",                                                       gridClass: "md:col-span-1 md:row-span-2" },
+  { id: 3, image: img3, title: "Vanguard Logistics Park",     category: "Industrial",    price: "$18,200,000", yield: "+16.5% Yield", desc: "State-of-the-art distribution center strategically located near major transit corridors with automated logistics integrations.",                                              gridClass: "md:col-span-1 md:row-span-1" },
+  { id: 4, image: img4, title: "Metropolitan Arts Gallery",   category: "Commercial",    price: "$5,300,000",  yield: "+11.4% Yield", desc: "A boutique cultural commercial venue hosting high-value exhibitions and private auctions in the arts district.",                                                         gridClass: "md:col-span-1 md:row-span-1" },
+  { id: 5, image: img5, title: "Metro Tech Park",             category: "Industrial",    price: "$24,500,000", yield: "+15.8% Yield", desc: "A fully leased modern industrial facility optimized for advanced manufacturing and regional distribution.",                                                          gridClass: "md:col-span-1 md:row-span-2" },
+  { id: 6, image: img6, title: "Aura Hilltop Retreat",        category: "Luxury Estate", price: "$14,800,000", yield: "+10.5% Yield", desc: "A high-end luxury resort property featuring eco-conscious modern architecture, private helipads, and stunning valley views.",                                      gridClass: "md:col-span-2 md:row-span-1" },
 ];
 
 export const BentoGallery = () => {
@@ -112,34 +58,43 @@ export const BentoGallery = () => {
 
       const hoverTl = gsap.timeline({ paused: true });
       hoverTl
-        .to(img,     { scale: 1.12, duration: 0.5, ease: 'power2.out' }, 0)
         .to(overlay, { opacity: 1,  duration: 0.3, ease: 'none' }, 0)
         .to(content, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.05)
         .to(frame,   { opacity: 1,  duration: 0.25, ease: 'none' }, 0);
 
       card.addEventListener('mouseenter', () => hoverTl.play());
+
       card.addEventListener('mouseleave', () => {
         hoverTl.reverse();
         gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'power3.out' });
-        gsap.to(img,  { x: 0, y: 0, duration: 0.6, ease: 'power3.out' });
+        // Reset zoom
+        gsap.to(img, { scale: 1, duration: 0.5, ease: 'power3.out', overwrite: 'auto' });
       });
 
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
-        const xc = rect.width  / 2;
-        const yc = rect.height / 2;
         const x  = e.clientX - rect.left;
         const y  = e.clientY - rect.top;
+        const xc = rect.width  / 2;
+        const yc = rect.height / 2;
+
+        // 3D tilt
         gsap.to(card, {
           rotateX: -((y - yc) / yc) * 7,
           rotateY:  ((x - xc) / xc) * 7,
           transformPerspective: 1000,
           duration: 0.35, ease: 'power2.out',
         });
+
+        // Cursor-position zoom — only that spot zooms
+        const pctX = (x / rect.width)  * 100;
+        const pctY = (y / rect.height) * 100;
+        img.style.transformOrigin = `${pctX}% ${pctY}%`;
         gsap.to(img, {
-          x: ((x - xc) / xc) * -8,
-          y: ((y - yc) / yc) * -8,
-          duration: 0.35, ease: 'power2.out',
+          scale: 1.5,
+          duration: 0.4,
+          ease: 'power2.out',
+          overwrite: 'auto',
         });
       });
     });
@@ -154,7 +109,8 @@ export const BentoGallery = () => {
         
         {/* Header */}
         <SectionHeading
-          badge="🌌 Portfolio bento"
+          badge="Portfolio Gallery"
+          icon={LayoutGrid}
           title="Interactive Bento Gallery"
           description="Explore high-liquidity digital real estate assets. Hover over any node to view real-time valuation metrics."
           align="center"

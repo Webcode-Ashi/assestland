@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin as MapPinIcon, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin as MapPinIcon, CheckCircle2, ArrowRight, Send } from 'lucide-react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
 
 export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', budget: '< $50k', msg: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', budget: ' ₹50k', msg: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ export const Contact = () => {
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      setFormData({ name: '', email: '', budget: '< $50k', msg: '' });
+      setFormData({ name: '', email: '', budget: ' ₹50k', msg: '' });
     }, 4500);
   };
 
@@ -52,7 +52,8 @@ export const Contact = () => {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8 contact-fade-left">
             <div className="space-y-6">
               <SectionHeading
-                badge="✉️ Reach Out"
+                badge="Reach Out"
+                icon={Send}
                 title="Start Your Property Investment Journey"
                 description="Request a comprehensive demo of our investment dashboard or speak directly with our capital allocation advisors."
                 align="left"
@@ -67,7 +68,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-505 font-bold uppercase tracking-wider">Email Inquiry</p>
-                  <a href="mailto:invest@assetland.com" className="text-xs sm:text-sm font-bold text-white hover:text-cyan-400 transition-colors">invest@assetland.com</a>
+                  <a href="mailto:contact@diintech.com" className="text-xs sm:text-sm font-bold text-white hover:text-cyan-400 transition-colors">contact@diintech.com</a>
                 </div>
               </div>
 
@@ -77,7 +78,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-550 font-bold uppercase tracking-wider">Direct Hotline</p>
-                  <a href="tel:+916386299554" className="text-xs sm:text-sm font-bold text-white hover:text-cyan-400 transition-colors">+91 6386299554</a>
+                  <a href="tel:+918147540362" className="text-xs sm:text-sm font-bold text-white hover:text-cyan-400 transition-colors">+91 8147540362</a>
                 </div>
               </div>
 
@@ -87,7 +88,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Global Headquarters</p>
-                  <p className="text-xs sm:text-sm font-bold text-white">Cyber Heights, Suite 900, Financial District</p>
+                  <p className="text-xs sm:text-sm font-bold text-white">C-116, Sector-2, Noida, Uttar Pradesh – 201301, India </p>
                 </div>
               </div>
             </div>
@@ -141,18 +142,35 @@ export const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Investment Capital Goal</label>
-                    <select 
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full glass-input rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-300 bg-[#121826]"
-                    >
-                      <option>&lt; $50k</option>
-                      <option>$50k - $250k</option>
-                      <option>$250k - $1M</option>
-                      <option>$1M+</option>
-                    </select>
-                  </div>
+  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+    Investment Capital Goal
+  </label>
+
+  <select
+    value={formData.budget}
+    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+    className="w-full rounded-xl px-4 py-3 text-xs sm:text-sm
+               text-slate-300 bg-[#121826]
+               border border-slate-700 outline none
+               focus:outline-none focus:border-blue-500"
+  >
+    <option value="₹50,000" className="bg-black text-white">
+       ₹50,000
+    </option>
+
+    <option value="₹50,000 - ₹250,000" className="bg-black text-white">
+      ₹50,000 - ₹250,000
+    </option>
+
+    <option value="₹250,000 - ₹1,000,000" className="bg-black text-white">
+      ₹250,000 - ₹1,000,000
+    </option>
+
+    <option value="₹1,000,000+" className="bg-black text-white">
+      ₹1,000,000+
+    </option>
+  </select>
+</div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Custom Requirements (Optional)</label>

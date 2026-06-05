@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
@@ -106,13 +107,13 @@ function CircularDashboard() {
   }, []);
 
   return (
-    <div ref={wrapRef} className="relative flex flex-col items-center select-none">
+    <div ref={wrapRef} className="relative flex flex-col items-center select-none w-full overflow-hidden">
 
       {/* SVG */}
       <div ref={svgRef} style={{ transformStyle: 'preserve-3d' }}>
         <svg
           viewBox="0 0 360 360"
-          className="w-[300px] h-[300px] sm:w-[360px] sm:h-[360px] drop-shadow-2xl"
+          className="w-full max-w-[300px] sm:max-w-[360px] h-auto drop-shadow-2xl mx-auto"
           style={{ overflow: 'visible' }}
         >
           <defs>
@@ -223,7 +224,8 @@ export const AIInsights = () => {
           {/* Left — Text */}
           <div className="lg:col-span-6 space-y-6 ai-fade-left">
             <SectionHeading
-              badge="🔮 Predictive Models"
+              badge="Predictive Models"
+              icon={Eye}
               title="Institutional-Grade Investment Analysis"
               description="Our advanced models analyze thousands of local data points—including municipal zoning plans, transit developments, localized rental demand, and macroeconomic trends—to project returns with institutional-grade precision."
               align="left"

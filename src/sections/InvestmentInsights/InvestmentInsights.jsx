@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TrendingUp, Clock, Award } from 'lucide-react';
+import { TrendingUp, Clock, Award, BarChart2 } from 'lucide-react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import video2 from '../../assets/videos/video2.mp4';
 
@@ -110,7 +110,8 @@ export const InvestmentInsights = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <SectionHeading
-          badge="📈 Yield Metrics"
+          badge="Yield Metrics"
+          icon={BarChart2}
           title="Investment Analytics & Trends"
           description="Live historical metrics demonstrating the performance advantage of AssetLand recommended purchases."
           align="center"

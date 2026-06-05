@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, Shield, TrendingUp, Landmark } from 'lucide-react';
+import { Brain, Shield, TrendingUp, Landmark, Star } from 'lucide-react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useGSAP } from '../../hooks/useGSAP';
 import gsap from 'gsap';
@@ -49,7 +49,8 @@ export const WhyAssetLand = () => {
     <section id="whyassetland" ref={scopeRef} className="py-16 sm:py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="💎 Core Advantages"
+          badge="Core Advantages"
+          icon={Star}
           title="Why Choose AssetLand?"
           description="Traditional real estate is outdated. Invest inside a technology ecosystem built for yield optimization."
           align="center"
